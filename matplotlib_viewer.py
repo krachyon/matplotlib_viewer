@@ -22,6 +22,8 @@ def press(event):
 
 
 def display(figure_file):
+    # TODO this is really brittle and just kills the current figure window to open a new one
+    #  with the same geometry. Would be nice to replace the content instead...
     old_fig = plt.gcf()
     geometry = plt.get_current_fig_manager().window.geometry()
 
