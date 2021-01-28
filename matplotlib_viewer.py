@@ -40,7 +40,7 @@ def display(figure_file):
 file_to_open = sys.argv[1]
 
 working_dir = os.path.dirname(file_to_open)
-figure_files = glob.glob(os.path.join(os.path.abspath(working_dir), '*.mplf'))
+figure_files = sorted(glob.glob(os.path.join(os.path.abspath(working_dir), '*.mplf')))
 
 current_index = figure_files.index(file_to_open)
 
