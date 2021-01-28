@@ -32,6 +32,7 @@ def display(figure_file):
 
     fig.show()
     plt.get_current_fig_manager().window.setGeometry(geometry)
+    fig.canvas.set_window_title(figure_file)
     plt.close(old_fig)
     plt.gcf().canvas.mpl_connect('key_press_event', press)
 
