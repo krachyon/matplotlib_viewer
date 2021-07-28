@@ -22,10 +22,10 @@ def fontscale(key):
 
     all_text = recurse_artists(fig.get_children())
     
-    inc = 1 if key=='+' else -1
+    inc = 1.1 if key=='+' else 0.9
 
     for text in all_text:
-        text.set_fontsize(text.get_fontsize()+inc)
+        text.set_fontsize(text.get_fontsize()*inc)
 
     plt.draw()   
 
