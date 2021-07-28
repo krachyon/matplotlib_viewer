@@ -1,11 +1,33 @@
 #! /usr/bin/env python3
 
 import matplotlib.pyplot as plt
+import matplotlib
 import pickle
 import sys
 import glob
 import os
 
+def recurse_artists(artist_list):
+    ret = []
+    for artist in artist_list:
+        if isinstance(artist, matplotlib.text.Text):
+            ret += [artist]
+        else:
+            ret += recurse_artists(artist.get_children())
+    return ret
+
+def fontscale(key):
+    artist_list = []
+    fig = plt.gcf()
+
+    all_text = recurse_artists(fig.get_children())
+    
+    inc = 1 if key=='+' else -1
+
+    for text in all_text:
+        text.set_fontsize(text.get_fontsize()+inc)
+
+    plt.draw()   
 
 def press(event):
     global current_index
@@ -15,6 +37,9 @@ def press(event):
         current_index -= 1
     elif event.key == 'right':
         current_index += 1
+    elif event.key in ['+','-']:
+        fontscale(event.key)
+        return
     else:
         return
 
