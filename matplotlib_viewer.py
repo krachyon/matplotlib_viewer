@@ -58,7 +58,9 @@ def fontscale(key):
 all_cmaps = [ cmap for i in dir(matplotlib.cm) if issubclass(type(cmap := getattr(matplotlib.cm, i)), matplotlib.colors.Colormap)]
 
 def change_colormap(key):
-    """TODO: Deduplicate x,v,c; transform all colormaps to ListedColormap immediately"""
+    """TODO: Deduplicate x,v,c; transform all colormaps to ListedColormap immediately to avoid bugs
+    Also: make sure we don't overwrite existing colormaps by using copy.
+    """
     fig = plt.gcf()
     all_images = recurse_artists(fig.get_children(), matplotlib.image.AxesImage)
     all_colorbars = [cbar for img in all_images if (cbar:=img.colorbar) is not None]
@@ -72,10 +74,7 @@ def change_colormap(key):
     elif key == 'c':
         cmap = all_images[0].get_cmap()
         random_cmap = random.choice(all_cmaps)
-        if hasattr(random_cmap, 'colors'):
-            addition = list(random_cmap.colors)
-        else:
-            addition = list(random_cmap(np.linspace(0,1,75))[:,:3])
+        addition = list(random_cmap(np.linspace(0,1,400))[:,:3])
         cmap = matplotlib.colors.ListedColormap(cmap.colors + addition)
     elif key == 'r':
         cmap = all_images[0].get_cmap().copy()
@@ -91,6 +90,8 @@ def change_colormap(key):
             '3': 'jet',
             '4': 'gnuplot',
             '5': 'prism'}[key]).copy()
+
+    cmap = matplotlib.colors.ListedColormap(list(cmap(np.linspace(0,1,400))[:,:3]))
 
     for image in all_images:
         image.set_cmap(cmap)
