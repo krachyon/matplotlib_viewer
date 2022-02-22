@@ -38,5 +38,6 @@ only works on images for now.
 
 in all cases: save figure like 
 ```python 
-compression_lib.open(filename_base+'.mplf', 'wb')
+compression_lib.open(filename_base+'.mplf', 'wb') as f:
+    pickle.dump(plt.gcf(), f)
 ```
