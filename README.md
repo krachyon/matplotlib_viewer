@@ -29,7 +29,7 @@ only works on images for now.
 - pressing `c` (for 'order') will extent the colormap with a random one
 - pressing `r` (for 'predictable') will shuffle the colormap
 
-[1] Holding down this key is a fun way to learn about exponential growth and a nice workout for your system
+[1] ~~Holding down this key is a fun way to learn about exponential growth and a nice workout for your system~~ actually the new behaviour of re-interpolating the colormap just creates some weird temporal Moiré pattern 
 
 # supported formats
 `plain, gzip, bz2, lzma` : always

@@ -74,7 +74,7 @@ def change_colormap(key):
     elif key == 'c':
         cmap = all_images[0].get_cmap()
         random_cmap = random.choice(all_cmaps)
-        addition = list(random_cmap(np.linspace(0,1,400))[:,:3])
+        addition = list(random_cmap(np.linspace(0,1,410))[:,:3])
         cmap = matplotlib.colors.ListedColormap(cmap.colors + addition)
     elif key == 'r':
         cmap = all_images[0].get_cmap().copy()
@@ -91,7 +91,7 @@ def change_colormap(key):
             '4': 'gnuplot',
             '5': 'prism'}[key]).copy()
 
-    cmap = matplotlib.colors.ListedColormap(list(cmap(np.linspace(0,1,400))[:,:3]))
+    cmap = matplotlib.colors.ListedColormap(list(cmap(np.linspace(0,1,810))[:,:3]))
 
     for image in all_images:
         image.set_cmap(cmap)
